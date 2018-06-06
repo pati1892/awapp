@@ -9,10 +9,19 @@ namespace NAA.Data.IDAO
     public interface IApplicantDAO
     {
 
+        #region Methods
+
         void AddApplicant(Applicant applicant);
+
+        void DeleteApplicant(int id);
+
+        void EditApplicant(Applicant applicant);
 
         List<Applicant> GetAllApplicants();
 
+        Applicant GetApplicant(int id);
+
+        #endregion Methods
 
     }
 }

@@ -22,6 +22,16 @@ namespace NAA.Data.DAO
             context.Applicant.Add(applicant);
         }
 
+        public void DeleteApplicant(int id)
+        {
+            
+        }
+
+        public void EditApplicant(Applicant applicant)
+        {
+           
+        }
+
         public List<Applicant> GetAllApplicants()
         {
             IQueryable<Applicant> applicants;
@@ -29,6 +39,11 @@ namespace NAA.Data.DAO
                          in context.Applicant
                          select applicant;
             return applicants.ToList<Applicant>();
+        }
+
+        public Applicant GetApplicant(int id)
+        {
+            return null;
         }
     }
 }

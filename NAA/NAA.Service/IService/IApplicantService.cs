@@ -10,9 +10,18 @@ namespace NAA.Service.IService
     public interface IApplicantService
     {
 
-        void addApplicant(Applicant applicant);
+        #region Methods
+
+        void AddApplicant(Applicant applicant);
+
+        void DeleteApplicant(int id);
+
+        void EditApplicant(Applicant applicant);
 
         List<Applicant> GetAllApplicants();
+        Applicant GetApplicant(int id);
+
+        #endregion Methods
 
     }
 }

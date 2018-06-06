@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAA.Data.Bean;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,32 @@ namespace NAA.WebService
     public class ApplicationService : System.Web.Services.WebService
     {
 
+        #region Methods
+
+        [WebMethod]
+        public List<ApplicationBEAN> GetApplications(string universityName)
+        {
+            return null;
+        }
+
+        [WebMethod]
+        public bool SetConditionalApplication(int applicationId)
+        {
+            return true;
+        }
+
+        [WebMethod]
+        public bool SetRejectApplication(int applicationId)
+        {
+            return true;
+        }
+        [WebMethod]
+        public bool SetUnconditionalApplication(int applicationId)
+        {
+            return true;
+        }
+
+        #endregion Methods
 
     }
 }

@@ -70,8 +70,14 @@
     <Compile Include="Application.cs">
       <DependentUpon>NaaDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Bean\ApplicationBEAN.cs" />
     <Compile Include="DAO\ApplicantDAO.cs" />
+    <Compile Include="DAO\ApplicationDAO.cs" />
+    <Compile Include="DAO\UniversityDAO.cs" />
+    <Compile Include="Enum\ApplicationState.cs" />
     <Compile Include="IDAO\IApplicantDAO.cs" />
+    <Compile Include="IDAO\IApplicationDAO.cs" />
+    <Compile Include="IDAO\IUniversityDAO.cs" />
     <Compile Include="NaaDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

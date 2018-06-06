@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bean\CourseBEAN.cs" />
+    <Compile Include="IService\ICourseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -123,8 +125,6 @@
     <None Include="Web References\SheffieldHallam\SHUWebService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bean\" />
-    <Folder Include="IService\" />
     <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
