@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SheffCourses">
+        <s:complexType />
+      </s:element>
+      <s:element name="SheffCoursesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SheffCoursesResult" type="tns:ArrayOfCourse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCourse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Course" nillable="true" type="tns:Course" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Course">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntryReq" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tarif" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="University" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NSS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Qulaification" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SheffCoursesInShort">
+        <s:complexType />
+      </s:element>
+      <s:element name="SheffCoursesInShortResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SheffCoursesInShortResult" type="tns:ArrayOfSSheffCourse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSSheffCourse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SSheffCourse" nillable="true" type="tns:SSheffCourse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SSheffCourse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntryReq" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfCourse" nillable="true" type="tns:ArrayOfCourse" />
+      <s:element name="ArrayOfSSheffCourse" nillable="true" type="tns:ArrayOfSSheffCourse" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SheffCoursesSoapIn">
+    <wsdl:part name="parameters" element="tns:SheffCourses" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesSoapOut">
+    <wsdl:part name="parameters" element="tns:SheffCoursesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesInShortSoapIn">
+    <wsdl:part name="parameters" element="tns:SheffCoursesInShort" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesInShortSoapOut">
+    <wsdl:part name="parameters" element="tns:SheffCoursesInShortResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesHttpGetIn" />
+  <wsdl:message name="SheffCoursesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourse" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesInShortHttpGetIn" />
+  <wsdl:message name="SheffCoursesInShortHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSSheffCourse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesHttpPostIn" />
+  <wsdl:message name="SheffCoursesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCourse" />
+  </wsdl:message>
+  <wsdl:message name="SheffCoursesInShortHttpPostIn" />
+  <wsdl:message name="SheffCoursesInShortHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSSheffCourse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="SheffieldWebServiceSoap">
+    <wsdl:operation name="SheffCourses">
+      <wsdl:input message="tns:SheffCoursesSoapIn" />
+      <wsdl:output message="tns:SheffCoursesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <wsdl:input message="tns:SheffCoursesInShortSoapIn" />
+      <wsdl:output message="tns:SheffCoursesInShortSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SheffieldWebServiceHttpGet">
+    <wsdl:operation name="SheffCourses">
+      <wsdl:input message="tns:SheffCoursesHttpGetIn" />
+      <wsdl:output message="tns:SheffCoursesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <wsdl:input message="tns:SheffCoursesInShortHttpGetIn" />
+      <wsdl:output message="tns:SheffCoursesInShortHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SheffieldWebServiceHttpPost">
+    <wsdl:operation name="SheffCourses">
+      <wsdl:input message="tns:SheffCoursesHttpPostIn" />
+      <wsdl:output message="tns:SheffCoursesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <wsdl:input message="tns:SheffCoursesInShortHttpPostIn" />
+      <wsdl:output message="tns:SheffCoursesInShortHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SheffieldWebServiceSoap" type="tns:SheffieldWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SheffCourses">
+      <soap:operation soapAction="http://tempuri.org/SheffCourses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <soap:operation soapAction="http://tempuri.org/SheffCoursesInShort" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheffieldWebServiceSoap12" type="tns:SheffieldWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SheffCourses">
+      <soap12:operation soapAction="http://tempuri.org/SheffCourses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <soap12:operation soapAction="http://tempuri.org/SheffCoursesInShort" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheffieldWebServiceHttpGet" type="tns:SheffieldWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SheffCourses">
+      <http:operation location="/SheffCourses" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <http:operation location="/SheffCoursesInShort" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SheffieldWebServiceHttpPost" type="tns:SheffieldWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SheffCourses">
+      <http:operation location="/SheffCourses" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SheffCoursesInShort">
+      <http:operation location="/SheffCoursesInShort" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SheffieldWebService">
+    <wsdl:port name="SheffieldWebServiceSoap" binding="tns:SheffieldWebServiceSoap">
+      <soap:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SheffieldWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheffieldWebServiceSoap12" binding="tns:SheffieldWebServiceSoap12">
+      <soap12:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SheffieldWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheffieldWebServiceHttpGet" binding="tns:SheffieldWebServiceHttpGet">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SheffieldWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SheffieldWebServiceHttpPost" binding="tns:SheffieldWebServiceHttpPost">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SheffieldWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

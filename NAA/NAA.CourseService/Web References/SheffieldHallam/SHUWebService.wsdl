@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SHUCourses">
+        <s:complexType />
+      </s:element>
+      <s:element name="SHUCoursesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SHUCoursesResult" type="tns:ArrayOfSHUCourse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSHUCourse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SHUCourse" nillable="true" type="tns:SHUCourse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SHUCourse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CourseId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRequirements" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CDegree" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CTarif" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CNSS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SHUCoursesInShort">
+        <s:complexType />
+      </s:element>
+      <s:element name="SHUCoursesInShortResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SHUCoursesInShortResult" type="tns:ArrayOfSHUCourseShort" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSHUCourseShort">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SHUCourseShort" nillable="true" type="tns:SHUCourseShort" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SHUCourseShort">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CourseId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CRequirements" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CDegree" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CTarif" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfSHUCourse" nillable="true" type="tns:ArrayOfSHUCourse" />
+      <s:element name="ArrayOfSHUCourseShort" nillable="true" type="tns:ArrayOfSHUCourseShort" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SHUCoursesSoapIn">
+    <wsdl:part name="parameters" element="tns:SHUCourses" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesSoapOut">
+    <wsdl:part name="parameters" element="tns:SHUCoursesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesInShortSoapIn">
+    <wsdl:part name="parameters" element="tns:SHUCoursesInShort" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesInShortSoapOut">
+    <wsdl:part name="parameters" element="tns:SHUCoursesInShortResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesHttpGetIn" />
+  <wsdl:message name="SHUCoursesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSHUCourse" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesInShortHttpGetIn" />
+  <wsdl:message name="SHUCoursesInShortHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSHUCourseShort" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesHttpPostIn" />
+  <wsdl:message name="SHUCoursesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSHUCourse" />
+  </wsdl:message>
+  <wsdl:message name="SHUCoursesInShortHttpPostIn" />
+  <wsdl:message name="SHUCoursesInShortHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSHUCourseShort" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="SHUWebServiceSoap">
+    <wsdl:operation name="SHUCourses">
+      <wsdl:input message="tns:SHUCoursesSoapIn" />
+      <wsdl:output message="tns:SHUCoursesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <wsdl:input message="tns:SHUCoursesInShortSoapIn" />
+      <wsdl:output message="tns:SHUCoursesInShortSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SHUWebServiceHttpGet">
+    <wsdl:operation name="SHUCourses">
+      <wsdl:input message="tns:SHUCoursesHttpGetIn" />
+      <wsdl:output message="tns:SHUCoursesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <wsdl:input message="tns:SHUCoursesInShortHttpGetIn" />
+      <wsdl:output message="tns:SHUCoursesInShortHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SHUWebServiceHttpPost">
+    <wsdl:operation name="SHUCourses">
+      <wsdl:input message="tns:SHUCoursesHttpPostIn" />
+      <wsdl:output message="tns:SHUCoursesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <wsdl:input message="tns:SHUCoursesInShortHttpPostIn" />
+      <wsdl:output message="tns:SHUCoursesInShortHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SHUWebServiceSoap" type="tns:SHUWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SHUCourses">
+      <soap:operation soapAction="http://tempuri.org/SHUCourses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <soap:operation soapAction="http://tempuri.org/SHUCoursesInShort" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SHUWebServiceSoap12" type="tns:SHUWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SHUCourses">
+      <soap12:operation soapAction="http://tempuri.org/SHUCourses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <soap12:operation soapAction="http://tempuri.org/SHUCoursesInShort" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SHUWebServiceHttpGet" type="tns:SHUWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SHUCourses">
+      <http:operation location="/SHUCourses" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <http:operation location="/SHUCoursesInShort" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SHUWebServiceHttpPost" type="tns:SHUWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SHUCourses">
+      <http:operation location="/SHUCourses" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SHUCoursesInShort">
+      <http:operation location="/SHUCoursesInShort" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SHUWebService">
+    <wsdl:port name="SHUWebServiceSoap" binding="tns:SHUWebServiceSoap">
+      <soap:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SHUWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SHUWebServiceSoap12" binding="tns:SHUWebServiceSoap12">
+      <soap12:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SHUWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SHUWebServiceHttpGet" binding="tns:SHUWebServiceHttpGet">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SHUWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SHUWebServiceHttpPost" binding="tns:SHUWebServiceHttpPost">
+      <http:address location="http://webteach_net.hallam.shu.ac.uk/cmsmr2/SHUWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
