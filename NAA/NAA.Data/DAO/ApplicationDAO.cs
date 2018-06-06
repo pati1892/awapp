@@ -10,33 +10,117 @@ namespace NAA.Data.DAO
 {
     public class ApplicationDAO : IApplicationDAO
     {
+
+        private NaaEntities context;
+
+        public ApplicationDAO()
+        {
+            this.context = new NaaEntities();
+        }
+
         #region Methods
 
         public void AddApplication(Application application)
         {
+            context.Application.Add(application);
+            context.SaveChanges();
         }
 
         public void DeleteApplication(int id)
         {
+            context.Application.Remove(this.GetApplication(id));
+            context.SaveChanges();
         }
 
         public void EditApplication(Application application)
         {
+            Application dbApplication = GetApplication(application.Id);
+
+
+            dbApplication.Firm = application.Firm;
+            dbApplication.PersonalStatement = application.PersonalStatement;
+            dbApplication.TeacherContactDetails = application.TeacherContactDetails;
+            dbApplication.TeacherReference = application.TeacherReference;
+            dbApplication.UniversityOffer = application.UniversityOffer;
+            context.SaveChanges();
         }
 
         public Application GetApplication(int id)
         {
-            return null;
+            return context.Application.First(r => r.Id == id);
         }
 
         public IList<ApplicationBEAN> GetApplications(int applicantId)
         {
-            return null;
+
+            IUniversityDAO uniDao = new UniversityDAO();
+            IApplicantDAO appDao = new ApplicantDAO();
+            var applicantName = appDao.GetApplicant(applicantId).ApplicantName;
+            return context
+                .Application
+                .Where(r => r.ApplicantId == applicantId)
+                .ToList()
+                .Select(r => new ApplicationBEAN()
+                {
+                    Id = r.Id
+                    ,
+                    ApplicantId = r.ApplicantId
+                    ,
+                    ApplicantName = applicantName
+                    ,
+                    CourseName = r.CourseName
+                    ,
+                    Firm = r.Firm
+                    ,
+                    PersonalStatement = r.PersonalStatement
+                    ,
+                    TeacherContactDetails = r.TeacherContactDetails
+                    ,
+                    TeacherReference = r.TeacherReference
+                    ,
+                    University = uniDao.GetUniversity(r.UniversityId).UniversityName
+                    ,
+                    UniversityOffer = r.UniversityOffer
+                })
+                .ToList();
+
+
         }
 
         public IList<ApplicationBEAN> GetApplications(string universityName)
         {
-            return null;
+
+            int uniId = new UniversityDAO().GetUniversity(universityName).UniversityId;
+            IApplicantDAO appDao = new ApplicantDAO();
+
+            return context
+                .Application
+                .Where(r => r.UniversityId == uniId)
+                .ToList()
+                .Select(r => new ApplicationBEAN()
+                {
+                    Id = r.Id
+                    ,
+                    ApplicantId = r.ApplicantId
+                    ,
+                    ApplicantName = appDao.GetApplicant(r.ApplicantId).ApplicantName
+                    ,
+                    CourseName = r.CourseName
+                    ,
+                    Firm = r.Firm
+                    ,
+                    PersonalStatement = r.PersonalStatement
+                    ,
+                    TeacherContactDetails = r.TeacherContactDetails
+                    ,
+                    TeacherReference = r.TeacherReference
+                    ,
+                    University = universityName
+                    ,
+                    UniversityOffer = r.UniversityOffer
+                })
+                .ToList();
+
         }
 
         #endregion Methods

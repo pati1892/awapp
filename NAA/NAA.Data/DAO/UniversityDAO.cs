@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 namespace NAA.Data.DAO
 {
     public class UniversityDAO : IUniversityDAO
-            {
-
-
+    {
         private NaaEntities context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UniversityDAO"/> class.
+        /// </summary>
         public UniversityDAO()
         {
             this.context = new NaaEntities();
@@ -20,6 +21,10 @@ namespace NAA.Data.DAO
 
         #region Methods
 
+        /// <summary>
+        /// Gets the universites.
+        /// </summary>
+        /// <returns></returns>
         public IList<University> GetUniversites()
         {
             IQueryable<University> unis;
@@ -30,14 +35,24 @@ namespace NAA.Data.DAO
             return unis.ToList();
         }
 
+        /// <summary>
+        /// Gets the university.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
         public University GetUniversity(string name)
         {
-            return null;
+           return context.University.First(r => r.UniversityName == name); 
         }
 
+        /// <summary>
+        /// Gets the university.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public University GetUniversity(int id)
         {
-            return null;
+            return context.University.First(r => r.UniversityId == id);
         }
 
         #endregion Methods
