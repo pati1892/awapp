@@ -25,6 +25,8 @@ namespace NAA.MVC.Controllers
         public ActionResult GetAllApplications(int id)
         {
             IList<ApplicationBEAN> applications = service.GetApplications(id);
+            ViewBag.applicantId = id;
+       
             return View(applications);
         }
     }

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<NAA.CourseService.Bean.CourseBEAN>
+
+@{
+    ViewBag.Title = "Get Courses";
+    Layout = "";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Condition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tarif)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.University)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Condition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tarif)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.University)
+        </td>
+        <td>
+            @Html.ActionLink("Apply", "ApplySheffield", new { courseId=item.Id, applicantId = ViewBag.applicantId }) 
+        </td>
+    </tr>
+}
+
+</table>
