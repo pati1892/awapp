@@ -30,9 +30,10 @@ namespace NAA.MVC.Controllers
         }
 
         [HttpPost]
-        public void Add(Applicant applicant)
+        public ActionResult Create(Applicant applicant)
         {
             service.AddApplicant(applicant);
+            return RedirectToAction(nameof(GetAllProfiles));
         }
 
 
@@ -44,9 +45,18 @@ namespace NAA.MVC.Controllers
         }
 
         [HttpPost]
-        public void Update(Applicant applicant)
+        public ActionResult Edit(Applicant applicant)
         {
-            service.EditApplicant(applicant);
+            try
+            {
+                service.EditApplicant(applicant);
+                return RedirectToAction("Details", new { id = applicant.Id });
+            }
+            catch
+            {
+                return View();
+
+            }
         }
 
         public ActionResult Details(int id)
@@ -55,5 +65,18 @@ namespace NAA.MVC.Controllers
             return View(applicant);
         }
 
+        public ActionResult Delete(int id)
+        {
+
+            Applicant applicant = service.GetApplicant(id);
+            return View(applicant);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Applicant applicant) {
+
+            service.DeleteApplicant(applicant.Id);
+            return RedirectToAction(nameof(GetAllProfiles));
+        }
     }
 }
