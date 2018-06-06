@@ -9,8 +9,10 @@ namespace NAA.CourseService.Mapper
 {
     internal class CourseMapper
     {
+
         #region Fields
 
+        private static readonly string SHEFFIELDHALAMNAME = "Sheffield Hallam";
         private static CourseMapper instance = null;
 
         #endregion Fields
@@ -38,13 +40,27 @@ namespace NAA.CourseService.Mapper
         public CourseBEAN Map(Sheffield.Course course)
         {
             var result = new CourseBEAN();
-            
+            result.Condition = course.EntryReq;
+            result.Degree = course.Qulaification;
+            result.Description = course.Description;
+            result.Id = course.Id;
+            result.Name = course.Name;
+            result.Nss = course.NSS.ToString();
+            result.Tarif = course.Tarif.ToString();
+            result.University = course.University;
             return result;
         }
         public CourseBEAN Map(SheffieldHallam.SHUCourse course)
         {
             var result = new CourseBEAN();
-
+            result.Condition = course.CRequirements;
+            result.Degree = course.CDegree;
+            result.Description = course.CDescription;
+            result.Id = course.CourseId;
+            result.Name = course.CName;
+            result.Nss = course.CNSS;
+            result.Tarif = course.CTarif;
+            result.University = SHEFFIELDHALAMNAME;
             return result;
         }
 

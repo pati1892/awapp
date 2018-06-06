@@ -11,13 +11,24 @@ namespace NAA.CourseService.Service
 {
     public class CourseService : ICourseService
     {
-        private readonly Sheffield.SheffieldWebService sheffieldProxy = null;
+        #region Fields
+
         private readonly SheffieldHallam.SHUWebService sheffieldHalamProxy = null;
+        private readonly Sheffield.SheffieldWebService sheffieldProxy = null;
+
+        #endregion Fields
+
+        #region Constructors
+
         public CourseService()
         {
             sheffieldProxy = new Sheffield.SheffieldWebService();
             sheffieldHalamProxy = new SheffieldHallam.SHUWebService();
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public IList<CourseBEAN> GetSheffieldCourses()
         {
@@ -46,5 +57,7 @@ namespace NAA.CourseService.Service
             }
             return result;
         }
+
+        #endregion Methods
     }
 }

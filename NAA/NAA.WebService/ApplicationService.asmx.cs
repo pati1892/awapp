@@ -20,12 +20,20 @@ namespace NAA.WebService
     // [System.Web.Script.Services.ScriptService]
     public class ApplicationService : System.Web.Services.WebService
     {
+        #region Fields
+
         private readonly naasi.IApplicationService appService = null;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ApplicationService()
         {
             appService = new naass.ApplicationService();
         }
+
+        #endregion Constructors
 
         #region Methods
 
