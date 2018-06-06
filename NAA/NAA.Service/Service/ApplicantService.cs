@@ -13,7 +13,6 @@ namespace NAA.Service.Service
 {
     public class ApplicantService : IApplicantService
     {
-
         #region Fields
 
         private readonly IApplicantDAO dao;
@@ -38,10 +37,12 @@ namespace NAA.Service.Service
 
         public void DeleteApplicant(int id)
         {
+            dao.DeleteApplicant(id);
         }
 
         public void EditApplicant(Applicant applicant)
         {
+            dao.EditApplicant(applicant);
         }
 
         public List<Applicant> GetAllApplicants()
