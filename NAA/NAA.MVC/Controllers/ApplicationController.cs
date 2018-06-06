@@ -1,10 +1,13 @@
-﻿using NAA.Service.IService;
+﻿using NAA.Data;
+using NAA.Data.Bean;
+using NAA.Service.IService;
 using NAA.Service.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace NAA.MVC.Controllers
 {
@@ -19,9 +22,10 @@ namespace NAA.MVC.Controllers
         }
 
         // GET: Application
-        public ActionResult Index()
+        public ActionResult GetAllApplications(int id)
         {
-            return View();
+            IList<ApplicationBEAN> applications = service.GetApplications(id);
+            return View(applications);
         }
     }
 }

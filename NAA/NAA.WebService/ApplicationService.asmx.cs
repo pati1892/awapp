@@ -47,6 +47,10 @@ namespace NAA.WebService
         public bool SetConditionalApplication(int applicationId)
         {
             var application = appService.GetApplication(applicationId);
+            if (application == null)
+            {
+                return false;
+            }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Conditional).ToString();
             if (currentValue != newValue)
@@ -65,6 +69,10 @@ namespace NAA.WebService
         public bool SetRejectApplication(int applicationId)
         {
             var application = appService.GetApplication(applicationId);
+            if (application == null)
+            {
+                return false;
+            }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Reject).ToString();
             if (currentValue != newValue)
@@ -84,6 +92,10 @@ namespace NAA.WebService
         public bool SetUnconditionalApplication(int applicationId)
         {
             var application = appService.GetApplication(applicationId);
+            if (application == null)
+            {
+                return false;
+            }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Reject).ToString();
             if (currentValue != newValue)
