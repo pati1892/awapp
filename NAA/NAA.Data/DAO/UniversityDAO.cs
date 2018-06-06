@@ -8,12 +8,26 @@ using System.Threading.Tasks;
 namespace NAA.Data.DAO
 {
     public class UniversityDAO : IUniversityDAO
-    {
+            {
+
+
+        private NaaEntities context;
+
+        public UniversityDAO()
+        {
+            this.context = new NaaEntities();
+        }
+
         #region Methods
 
         public IList<University> GetUniversites()
         {
-            return null;
+            IQueryable<University> unis;
+            unis = from uni
+                   in context.University
+                   select uni;
+
+            return unis.ToList();
         }
 
         public University GetUniversity(string name)

@@ -10,7 +10,7 @@ namespace NAA.Data.DAO
     public class ApplicantDAO : IApplicantDAO
     {
 
-        private NaaEntities context; 
+        private NaaEntities context;
 
         public ApplicantDAO()
         {
@@ -25,7 +25,7 @@ namespace NAA.Data.DAO
 
         public void DeleteApplicant(int id)
         {
-            
+
             context.Applicant.Remove(this.GetApplicant(id));
             context.SaveChanges();
         }
@@ -52,8 +52,8 @@ namespace NAA.Data.DAO
 
         public Applicant GetApplicant(int id)
         {
-            return  context.Applicant.First(r => r.Id == id);
-            
+            return context.Applicant.First(r => r.Id == id);
+
         }
     }
 }
