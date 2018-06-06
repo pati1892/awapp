@@ -44,12 +44,14 @@
   <ItemGroup>
     <Compile Include="Bean\CourseBEAN.cs" />
     <Compile Include="IService\ICourseService.cs" />
+    <Compile Include="Mapper\CourseMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Service\CourseService.cs" />
     <Compile Include="Web References\SheffieldHallam\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,8 +126,6 @@
   <ItemGroup>
     <None Include="Web References\SheffieldHallam\SHUWebService.disco" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
