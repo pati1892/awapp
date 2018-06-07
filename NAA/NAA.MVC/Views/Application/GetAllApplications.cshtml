@@ -28,9 +28,6 @@
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Firm)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PersonalStatement)
             </th>
             <th>
@@ -44,6 +41,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UniversityOffer)
+            </th>
+            <th>
+                @Html.DisplayName("Enrolled")
             </th>
             <th></th>
         </tr>
@@ -61,20 +61,6 @@
                     @Html.DisplayFor(modelItem => item.CourseName)
                 </td>
                 <td>
-                    @if (item.Firm.HasValue)
-                    {
-                        @Html.DisplayFor(modelItem => item.Firm.Value)
-                    }
-                    else
-                    {
-                        if (!ViewBag.IsEnrolled)
-                        {
-                            @Html.ActionLink("Enroll me", "EnrollApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayName(" | ")
-                            @Html.ActionLink("Reject", "RejectApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
-                        }
-                    }
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.PersonalStatement)
                 </td>
                 <td>
@@ -90,14 +76,32 @@
                     @Html.DisplayFor(modelItem => item.UniversityOffer)
                 </td>
                 <td>
-                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString() && !ViewBag.IsEnrolled)
+                    @if (item.Firm.HasValue)
                     {
-                        @Html.ActionLink("Edit", "EditApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayName(" |");
+                        @Html.DisplayFor(modelItem => item.Firm.Value)
                     }
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    else
+                    {
+                        if (!ViewBag.IsEnrolled)
+                        {
+                            if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Unconditional).ToString())
+                            {
+                                @Html.ActionLink("Enroll me", "EnrollApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayName(" | ")
+                            }
+                            if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Unconditional).ToString() || item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Conditional).ToString())
+                            {
+                                @Html.ActionLink("Reject", "RejectApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
+                            }
+                        }
+                    }
+                </td>
+                <td>
                     @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString() && !ViewBag.IsEnrolled)
                     {
-                        @Html.DisplayName("| ");
+                        @Html.ActionLink("Edit", "EditApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayName(" | ");
+                    }
+                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString() && !ViewBag.IsEnrolled)
+                    {
                         @Html.ActionLink("Delete", "DeleteApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
                     }
                 </td>

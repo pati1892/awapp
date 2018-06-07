@@ -52,6 +52,10 @@ namespace NAA.WebService
             {
                 return false;
             }
+            if (appService.IsEnrolled(application.ApplicantId))
+            {
+                return false;
+            }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Conditional).ToString();
             if (currentValue != newValue)
@@ -71,6 +75,10 @@ namespace NAA.WebService
         {
             var application = appService.GetApplication(applicationId);
             if (application == null)
+            {
+                return false;
+            }
+            if (appService.IsEnrolled(application.ApplicantId))
             {
                 return false;
             }
@@ -94,6 +102,10 @@ namespace NAA.WebService
         {
             var application = appService.GetApplication(applicationId);
             if (application == null)
+            {
+                return false;
+            }
+            if (appService.IsEnrolled(application.ApplicantId))
             {
                 return false;
             }
