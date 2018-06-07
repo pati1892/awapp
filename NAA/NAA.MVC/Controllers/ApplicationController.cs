@@ -61,7 +61,7 @@ namespace NAA.MVC.Controllers
             {
                 ModelState.AddModelError("PersonalStatement", "Personal statement is required");
             }
-            else if (string.IsNullOrEmpty(application.TeacherContactDetails))
+            if (string.IsNullOrEmpty(application.TeacherContactDetails))
             {
                 ModelState.AddModelError("TeacherContactDetails", "Teacher contact details are required");
             }
@@ -96,7 +96,7 @@ namespace NAA.MVC.Controllers
             {
                 ModelState.AddModelError("PersonalStatement", "Personal statement is required");
             }
-            else if (string.IsNullOrEmpty(application.TeacherContactDetails))
+            if (string.IsNullOrEmpty(application.TeacherContactDetails))
             {
                 ModelState.AddModelError("TeacherContactDetails", "Teacher contact details are required");
             }
@@ -153,7 +153,7 @@ namespace NAA.MVC.Controllers
             {
                 ModelState.AddModelError("PersonalStatement", "Personal statement is required");
             }
-            else if (string.IsNullOrEmpty(application.TeacherContactDetails))
+            if (string.IsNullOrEmpty(application.TeacherContactDetails))
             {
                 ModelState.AddModelError("TeacherContactDetails", "Teacher contact details are required");
             }
