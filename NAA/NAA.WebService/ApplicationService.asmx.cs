@@ -97,7 +97,7 @@ namespace NAA.WebService
                 return false;
             }
             var currentValue = application.UniversityOffer;
-            var newValue = ((char)ApplicationState.Reject).ToString();
+            var newValue = ((char)ApplicationState.Unconditional).ToString();
             if (currentValue != newValue)
             {
                 if (application.Firm.HasValue && application.Firm.Value || currentValue == ((char)ApplicationState.Reject).ToString())

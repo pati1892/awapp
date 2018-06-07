@@ -15,9 +15,15 @@ namespace NAA.Service.Service
 {
     public class ApplicationService : IApplicationService
     {
-        #region Methods
+
+        #region Fields
+
+        private readonly IApplicationDAO applicationDAO;
         private readonly IUniversityService universityService;
-        private readonly IApplicationDAO applicationDAO;  
+
+        #endregion Fields
+
+        #region Constructors
 
         public ApplicationService()
         {
@@ -25,9 +31,12 @@ namespace NAA.Service.Service
             applicationDAO = new ApplicationDAO();
         }
 
-        public void AddApplication(CourseBEAN course, int applicantId)
+        #endregion Constructors
+
+        #region Methods
+
+        public void AddApplication(Application application, CourseBEAN course, int applicantId)
         {
-            Application application = new Application();
             application.ApplicantId = applicantId;
             application.CourseName = course.Name;
             application.UniversityId = universityService.GetUniversity(course.University).UniversityId;
@@ -61,5 +70,6 @@ namespace NAA.Service.Service
         }
 
         #endregion Methods
+
     }
 }

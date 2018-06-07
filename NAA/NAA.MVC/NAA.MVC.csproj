@@ -209,11 +209,11 @@
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Profile\Details.cshtml" />
     <Content Include="Views\Profile\Delete.cshtml" />
-    <Content Include="Views\Application\GetAllApplications.cshtml" />
     <Content Include="Views\Course\GetSheffieldCourses.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\GetSheffieldHalamCourses.cshtml" />
-    <Content Include="Views\Course\ApplySheffield.cshtml" />
+    <Content Include="Views\Application\ApplySheffield.cshtml" />
+    <Content Include="Views\Application\GetAllApplications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

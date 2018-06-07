@@ -14,7 +14,7 @@ namespace NAA.Service.IService
 
         #region Methods
 
-        void AddApplication(CourseBEAN course, int applicantId);
+        void AddApplication(Application application, CourseBEAN course, int applicantId);
         void DeleteApplication(int id);
 
         void EditApplication(Application application);
