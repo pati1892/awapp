@@ -8,9 +8,9 @@
     <h3 style="color:red">@ViewBag.Message</h3>
 }
 
-@if (ViewBag.ToManyApplications)
+@if (ViewBag.ShowInfo)
 {
-    <h3 style="color:red">@ViewBag.ToManyApplicationsMessage</h3>
+    <h3 style="color:red">@ViewBag.InfoMessage</h3>
     @Html.ActionLink("Back to applications", "GetAllApplications", new { Controller = "Application", id = ViewBag.applicantId })
 }
 <h2>Sheffield</h2>

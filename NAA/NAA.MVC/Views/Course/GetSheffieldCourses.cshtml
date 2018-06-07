@@ -27,7 +27,7 @@
         <th>
             @Html.DisplayNameFor(model => model.University)
         </th>
-        @if (!ViewBag.ToManyApplications)
+        @if (ViewBag.CanApply)
         {
             <th></th>
         }
@@ -57,7 +57,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.University)
             </td>
-            @if (!ViewBag.ToManyApplications)
+            @if (ViewBag.CanApply)
             {
                 <td>
                     @Html.ActionLink("Apply", "ApplySheffield", new { courseId = item.Id, applicantId = ViewBag.applicantId, Controller = "Application" })

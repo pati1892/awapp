@@ -24,6 +24,7 @@ namespace NAA.WebService
         #region Fields
 
         private readonly naasi.IApplicationService appService = null;
+        private readonly naasi.IUniversityService uniService = null;
 
         #endregion Fields
 
@@ -32,29 +33,27 @@ namespace NAA.WebService
         public ApplicationService()
         {
             appService = new naass.ApplicationService();
+            uniService = new naass.UniversityService();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        [WebMethod(Description = "Get all Applications of an university")]
+        [WebMethod(Description = "Get all applications of an university")]
         public List<ApplicationBEAN> GetApplications(string universityName)
         {
             return appService.GetApplications(universityName).ToList();
         }
 
         [WebMethod(Description = "Updates the state of an application to 'conditonal'")]
-        public bool SetConditionalApplication(int applicationId)
+        public bool SetConditionalApplication(int applicationId, string universityName)
         {
-            var application = appService.GetApplication(applicationId);
-            if (application == null)
+            Data.Application application;
+            bool validInput = CheckPreConditions(applicationId, universityName, out application);
+            if (!validInput)
             {
-                return false;
-            }
-            if (appService.IsEnrolled(application.ApplicantId))
-            {
-                return false;
+                return validInput;
             }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Conditional).ToString();
@@ -71,16 +70,13 @@ namespace NAA.WebService
         }
 
         [WebMethod(Description = "Updates the state of an application to 'reject'")]
-        public bool SetRejectApplication(int applicationId)
+        public bool SetRejectApplication(int applicationId, string universityName)
         {
-            var application = appService.GetApplication(applicationId);
-            if (application == null)
+            Data.Application application;
+            bool validInput = CheckPreConditions(applicationId, universityName, out application);
+            if (!validInput)
             {
-                return false;
-            }
-            if (appService.IsEnrolled(application.ApplicantId))
-            {
-                return false;
+                return validInput;
             }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Reject).ToString();
@@ -96,18 +92,14 @@ namespace NAA.WebService
             return true;
         }
 
-
         [WebMethod(Description = "Updates the state of an application to 'unconditional'")]
-        public bool SetUnconditionalApplication(int applicationId)
+        public bool SetUnconditionalApplication(int applicationId, string universityName)
         {
-            var application = appService.GetApplication(applicationId);
-            if (application == null)
+            Data.Application application;
+            bool validInput = CheckPreConditions(applicationId, universityName, out application);
+            if (!validInput)
             {
-                return false;
-            }
-            if (appService.IsEnrolled(application.ApplicantId))
-            {
-                return false;
+                return validInput;
             }
             var currentValue = application.UniversityOffer;
             var newValue = ((char)ApplicationState.Unconditional).ToString();
@@ -122,7 +114,33 @@ namespace NAA.WebService
             return true;
         }
 
-        #endregion Methods
+        private bool CheckPreConditions(int applicationId, string universityName, out Data.Application application)
+        {
+            application = appService.GetApplication(applicationId);
+            var uni = uniService.GetUniversity(universityName);
+            if (uni == null)
+            {
+                return false;
+            }
+            if (application == null)
+            {
+                return false;
+            }
+            if (appService.IsEnrolled(application.ApplicantId))
+            {
+                return false;
+            }
+            if (application.UniversityId != uni.UniversityId)
+            {
+                return false;
+            }
+            if (application.Firm.HasValue)
+            {
+                return false;
+            }
+            return true;
+        }
 
+        #endregion Methods
     }
 }

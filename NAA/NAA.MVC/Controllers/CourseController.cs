@@ -28,8 +28,13 @@ namespace NAA.MVC.Controllers
         public ActionResult Index(int id)
         {
             ViewBag.applicantId = id;
-            ViewBag.ToManyApplications = appService.GetApplications(id).Count >= 5;
-            ViewBag.ToManyApplicationsMessage = "You are already applied to 5 courses.";
+            ViewBag.ShowInfo = appService.IsEnrolled(id);
+            ViewBag.InfoMessage = "You already enrolled.";
+            if (!ViewBag.ShowInfo)
+            {
+                ViewBag.ShowInfo = appService.GetApplications(id).Count >= 5;
+                ViewBag.InfoMessage = "You are already applied to 5 courses.";
+            }
             return View();
         }
         public ActionResult WithMessage(string message, int applicantId)
@@ -43,7 +48,7 @@ namespace NAA.MVC.Controllers
         {
             IList<CourseBEAN> courses = service.GetSheffieldCourses();
             ViewBag.applicantId = id;
-            ViewBag.ToManyApplications = appService.GetApplications(id).Count >= 5;
+            ViewBag.CanApply = !appService.IsEnrolled(id) && appService.GetApplications(id).Count < 5;
             return View(courses);
         }
 
@@ -51,7 +56,7 @@ namespace NAA.MVC.Controllers
         {
             IList<CourseBEAN> courses = service.GetSheffieldHallamCourses();
             ViewBag.applicantId = id;
-            ViewBag.ToManyApplications = appService.GetApplications(id).Count >= 5;
+            ViewBag.CanApply = !appService.IsEnrolled(id) && appService.GetApplications(id).Count < 5;
             return View(courses);
         }
 
