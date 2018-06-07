@@ -11,13 +11,19 @@ namespace NAA.Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Applicant
     {
         public int Id { get; set; }
+
+        [DisplayName("Name")]
         public string ApplicantName { get; set; }
+        [DisplayName("Adress")]
         public string ApplicantAddress { get; set; }
+        [DisplayName("Phone")]
         public string Phone { get; set; }
+        [DisplayName("Email")]
         public string Email { get; set; }
     }
 }

@@ -32,8 +32,31 @@ namespace NAA.MVC.Controllers
         [HttpPost]
         public ActionResult Create(Applicant applicant)
         {
-            service.AddApplicant(applicant);
-            return RedirectToAction(nameof(GetAllProfiles));
+            if (string.IsNullOrEmpty(applicant.ApplicantName))
+            {
+                ModelState.AddModelError("ApplicantName", "ApplicantName is required");
+            }
+            else if (string.IsNullOrEmpty(applicant.ApplicantAddress))
+            {
+                ModelState.AddModelError("ApplicantAddress", "ApplicantAddress is required");
+            }
+            else if (string.IsNullOrEmpty(applicant.Phone))
+            {
+                ModelState.AddModelError("Phone", "Phone is required");
+            }
+            else if (string.IsNullOrEmpty(applicant.Email))
+            {
+                ModelState.AddModelError("Email", "Email is required");
+            }
+            if (ModelState.IsValid)
+            {
+                service.AddApplicant(applicant);
+                return RedirectToAction(nameof(GetAllProfiles));
+            }
+            return View();
+
+           
+            
         }
 
 
@@ -49,8 +72,30 @@ namespace NAA.MVC.Controllers
         {
             try
             {
-                service.EditApplicant(applicant);
-                return RedirectToAction("Details", new { id = applicant.Id });
+                if (string.IsNullOrEmpty(applicant.ApplicantName))
+                {
+                    ModelState.AddModelError("ApplicantName", "Name is required");
+                }
+                else if (string.IsNullOrEmpty(applicant.ApplicantAddress))
+                {
+                    ModelState.AddModelError("ApplicantAddress", "Adress is required");
+                }
+                else if (string.IsNullOrEmpty(applicant.Phone))
+                {
+                    ModelState.AddModelError("Phone", "Phone is required");
+                }
+                else if (string.IsNullOrEmpty(applicant.Email))
+                {
+                    ModelState.AddModelError("Email", "Email is required");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    service.EditApplicant(applicant);
+                    return RedirectToAction("Details", new { id = applicant.Id });
+                }
+                return View();
+
             }
             catch
             {
