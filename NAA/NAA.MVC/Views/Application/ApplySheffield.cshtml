@@ -72,3 +72,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index", new { Controller = "Course", id = int.Parse(Request.QueryString["applicantId"]) })
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

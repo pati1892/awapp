@@ -1,4 +1,5 @@
 ﻿using NAA.Data.Bean;
+using NAA.Data.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,10 @@ namespace NAA.Data.IDAO
 
         void AddApplication(Application application);
         void DeleteApplication(int id);
-
         void EditApplication(Application application);
+
+        void EditApplicationState(int applicationId, ApplicationState state);
+        void EditFirm(int applicationId, bool enroll);
 
         Application GetApplication(int id);
 

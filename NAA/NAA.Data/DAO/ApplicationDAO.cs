@@ -1,4 +1,5 @@
 ﻿using NAA.Data.Bean;
+using NAA.Data.Enum;
 using NAA.Data.IDAO;
 using System;
 using System.Collections.Generic;
@@ -35,13 +36,22 @@ namespace NAA.Data.DAO
         public void EditApplication(Application application)
         {
             Application dbApplication = GetApplication(application.Id);
-
-
-            dbApplication.Firm = application.Firm;
             dbApplication.PersonalStatement = application.PersonalStatement;
             dbApplication.TeacherContactDetails = application.TeacherContactDetails;
             dbApplication.TeacherReference = application.TeacherReference;
-            dbApplication.UniversityOffer = application.UniversityOffer;
+            context.SaveChanges();
+        }
+        public void EditApplicationState(int applicationId, ApplicationState state)
+        {
+            Application dbApplication = GetApplication(applicationId);
+            dbApplication.UniversityOffer = ((char)state).ToString();
+            context.SaveChanges();
+        }
+
+        public void EditFirm(int applicationId, bool enroll)
+        {
+            Application dbApplication = GetApplication(applicationId);
+            dbApplication.Firm = enroll;
             context.SaveChanges();
         }
 

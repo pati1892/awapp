@@ -1,10 +1,11 @@
 ﻿@model NAA.Data.Application
 
 @{
-    ViewBag.Title = "Apply for " + @ViewBag.Course.Name;
+    ViewBag.Title = "Edit your Application";
 }
 
-<h2>Apply for @ViewBag.Course.Name</h2>
+<h2>Edit your Application</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -13,18 +14,20 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         @*<div class="form-group">
                 @Html.LabelFor(model => model.ApplicantId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ApplicantId, new {  htmlAttributes = new { @Value = ViewBag.ApplicantId, @class = "form-control", @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.ApplicantId, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.ApplicantId, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CourseName,  htmlAttributes: new {  @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @Value = ViewBag.CourseName, @class = "form-control", @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -32,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.UniversityId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.UniversityId, new { htmlAttributes = new { @Value = ViewBag.UniversityId, @class = "form-control", @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.UniversityId, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.UniversityId, "", new { @class = "text-danger" })
                 </div>
             </div>*@
@@ -63,14 +66,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { Controller = "Course", id = int.Parse(Request.QueryString["applicantId"]) })
+    @Html.ActionLink("Back to List", "GetAllApplications", new { id = ViewBag.applicantId })
 </div>
 
 @section Scripts {

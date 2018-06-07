@@ -55,6 +55,16 @@ namespace NAA.Service.Service
             applicationDAO.EditApplication(application);
         }
 
+        public void EditApplicationState(int applicationId, ApplicationState state)
+        {
+            applicationDAO.EditApplicationState(applicationId, state);
+        }
+
+        public void EditFirm(int applicationId, bool enroll)
+        {
+            applicationDAO.EditFirm(applicationId, enroll);
+        }
+
         public Application GetApplication(int id)
         {
             return applicationDAO.GetApplication(id);

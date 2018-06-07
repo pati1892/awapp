@@ -20,6 +20,7 @@ namespace NAA.WebService
     // [System.Web.Script.Services.ScriptService]
     public class ApplicationService : System.Web.Services.WebService
     {
+
         #region Fields
 
         private readonly naasi.IApplicationService appService = null;
@@ -61,7 +62,7 @@ namespace NAA.WebService
                 }
             }
             application.UniversityOffer = newValue;
-            appService.EditApplication(application);
+            appService.EditApplicationState(applicationId, ApplicationState.Conditional);
             return true;
         }
 
@@ -83,7 +84,7 @@ namespace NAA.WebService
                 }
             }
             application.UniversityOffer = newValue;
-            appService.EditApplication(application);
+            appService.EditApplicationState(applicationId, ApplicationState.Reject);
             return true;
         }
 
@@ -105,8 +106,7 @@ namespace NAA.WebService
                     return false;
                 }
             }
-            application.UniversityOffer = newValue;
-            appService.EditApplication(application);
+            appService.EditApplicationState(applicationId, ApplicationState.Unconditional);
             return true;
         }
 

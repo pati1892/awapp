@@ -101,6 +101,22 @@ namespace NAA.MVC.Controllers
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
 
+
+        public ActionResult EditApplication(int id, int applicantId)
+        {
+            Application application = appService.GetApplication(id);
+            ViewBag.applicantId = applicantId;
+            return View(application);
+        }
+
+
+        [HttpPost]
+        public ActionResult EditApplication(Application application, int applicantId)
+        {
+            appService.EditApplication(application);
+            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+        }
+
         #endregion Methods
     }
 }

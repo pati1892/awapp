@@ -216,6 +216,7 @@
     <Content Include="Views\Application\GetAllApplications.cshtml" />
     <Content Include="Views\Application\ApplyHalam.cshtml" />
     <Content Include="Views\Application\DeleteApplication.cshtml" />
+    <Content Include="Views\Application\EditApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

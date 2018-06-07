@@ -1,6 +1,7 @@
 ﻿using NAA.CourseService.Bean;
 using NAA.Data;
 using NAA.Data.Bean;
+using NAA.Data.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace NAA.Service.IService
         void DeleteApplication(int id);
 
         void EditApplication(Application application);
+
+        void EditApplicationState(int applicationId, ApplicationState state);
+
+        void EditFirm(int applicationId, bool enroll);
 
         Application GetApplication(int id);
 

@@ -84,7 +84,7 @@
                 <td>
                     @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString())
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) @Html.DisplayText(" |");
+                        @Html.ActionLink("Edit", "EditApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayText(" |");
                     }
                     @Html.ActionLink("Details", "Details", new { id = item.Id })
                     @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString())
