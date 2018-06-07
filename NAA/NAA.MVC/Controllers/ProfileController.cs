@@ -12,16 +12,24 @@ namespace NAA.MVC.Controllers
     public class ProfileController : Controller
     {
 
+        private IApplicationService appService;
         private IApplicantService service;
-
+        
         public ProfileController()
         {
             service = new ApplicantService();
+            appService = new ApplicationService();
         }
 
         public ActionResult GetAllProfiles()
         {
             return View(service.GetAllApplicants());
+        }
+
+        public ActionResult GetAllProfilesWithMessage()
+        {
+            ViewBag.Message = "Cannot delete profile, existing applications must be deleted first";
+            return View("GetAllProfiles", service.GetAllApplicants());
         }
 
         public ActionResult Create()
@@ -112,7 +120,10 @@ namespace NAA.MVC.Controllers
 
         public ActionResult Delete(int id)
         {
-
+            if(appService.GetApplications(id).Count > 0)
+            {
+                return RedirectToAction(nameof(GetAllProfilesWithMessage));
+            }
             Applicant applicant = service.GetApplicant(id);
             return View(applicant);
         }
