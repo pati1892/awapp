@@ -43,6 +43,11 @@ namespace NAA.WebService
         [WebMethod(Description = "Get all applications of an university")]
         public List<ApplicationBEAN> GetApplications(string universityName)
         {
+            var uni = uniService.GetUniversity(universityName);
+            if (uni == null)
+            {
+                return null;
+            }
             return appService.GetApplications(universityName).ToList();
         }
 

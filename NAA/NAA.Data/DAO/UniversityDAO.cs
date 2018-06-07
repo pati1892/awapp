@@ -9,7 +9,13 @@ namespace NAA.Data.DAO
 {
     public class UniversityDAO : IUniversityDAO
     {
+        #region Fields
+
         private NaaEntities context;
+
+        #endregion Fields
+
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversityDAO"/> class.
@@ -18,6 +24,8 @@ namespace NAA.Data.DAO
         {
             this.context = new NaaEntities();
         }
+
+        #endregion Constructors
 
         #region Methods
 
@@ -42,7 +50,7 @@ namespace NAA.Data.DAO
         /// <returns></returns>
         public University GetUniversity(string name)
         {
-           return context.University.First(r => r.UniversityName == name); 
+           return context.University.FirstOrDefault(r => r.UniversityName == name); 
         }
 
         /// <summary>
@@ -56,5 +64,6 @@ namespace NAA.Data.DAO
         }
 
         #endregion Methods
+
     }
 }
