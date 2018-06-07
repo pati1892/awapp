@@ -54,6 +54,8 @@ namespace NAA.MVC.Controllers
         public ActionResult ApplyHalam(Application application, int courseId, int applicantId)
         {
             CourseBEAN course = service.GetSheffieldHallamCourses().First(x => x.Id == courseId);
+            ViewBag.Course = course;
+            ViewBag.University = uniService.GetUniversity(course.University);
             //validation
             if (string.IsNullOrEmpty(application.PersonalStatement))
             {
@@ -87,6 +89,8 @@ namespace NAA.MVC.Controllers
         public ActionResult ApplySheffield(Application application, int courseId, int applicantId)
         {
             CourseBEAN course = service.GetSheffieldCourses().First(x => x.Id == courseId);
+            ViewBag.Course = course;
+            ViewBag.University = uniService.GetUniversity(course.University);
             //validation
             if (string.IsNullOrEmpty(application.PersonalStatement))
             {
