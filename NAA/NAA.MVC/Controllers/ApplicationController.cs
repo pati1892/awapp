@@ -65,7 +65,7 @@ namespace NAA.MVC.Controllers
             ViewBag.University = uniService.GetUniversity(course.University);
             if (appService.IsDuplicate(course, applicantId))
             {
-                return RedirectToAction("WithMessage", "Course", new { message = $"You already applied to '{course.Name}'.", applicantId=applicantId });
+                return RedirectToAction("WithMessage", "Course", new { message = $"You already applied to '{course.Name}'.", applicantId = applicantId });
             }
             return View();
         }
@@ -78,17 +78,12 @@ namespace NAA.MVC.Controllers
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
 
-        // GET: Application
-        public ActionResult GetAllApplications(int id)
-        {
-            IList<ApplicationBEAN> applications = appService.GetApplications(id);
-            ViewBag.applicantId = id;
-            ViewBag.IsEnrolled = applications.Any(x => x.Firm.HasValue && x.Firm.Value);
-            return View(applications);
-        }
-
         public ActionResult DeleteApplication(int id, int applicantId)
         {
+            if (!appService.DeletableOrEditable(id, applicantId))
+            {
+                return RedirectToAction("NotAllowMethod", "Home");
+            }
             Application application = appService.GetApplication(id);
             ViewBag.applicantId = applicantId;
             return View(application);
@@ -97,22 +92,32 @@ namespace NAA.MVC.Controllers
         [HttpPost]
         public ActionResult DeleteApplication(Application application, int applicantId)
         {
+            if (!appService.DeletableOrEditable(application.Id, applicantId))
+            {
+                return RedirectToAction("NotAllowMethod", "Home");
+            }
             appService.DeleteApplication(application.Id);
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
 
-
         public ActionResult EditApplication(int id, int applicantId)
         {
+            if (!appService.DeletableOrEditable(id, applicantId))
+            {
+                return RedirectToAction("NotAllowMethod", "Home");
+            }
             Application application = appService.GetApplication(id);
             ViewBag.applicantId = applicantId;
             return View(application);
         }
 
-
         [HttpPost]
         public ActionResult EditApplication(Application application, int applicantId)
         {
+            if (!appService.DeletableOrEditable(application.Id, applicantId))
+            {
+                return RedirectToAction("NotAllowMethod", "Home");
+            }
             appService.EditApplication(application);
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
@@ -123,11 +128,21 @@ namespace NAA.MVC.Controllers
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
 
+        // GET: Application
+        public ActionResult GetAllApplications(int id)
+        {
+            IList<ApplicationBEAN> applications = appService.GetApplications(id);
+            ViewBag.applicantId = id;
+            ViewBag.IsEnrolled = appService.IsEnrolled(id);
+            return View(applications);
+        }
         public ActionResult RejectApplication(int id, int applicantId)
         {
             appService.EditFirm(id, false);
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
+
         #endregion Methods
+
     }
 }

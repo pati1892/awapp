@@ -13,9 +13,10 @@ namespace NAA.Service.Service
 {
     public class ApplicantService : IApplicantService
     {
+
         #region Fields
 
-        private readonly IApplicantDAO dao;
+        private readonly IApplicantDAO applicantDao;
 
         #endregion Fields
 
@@ -23,7 +24,7 @@ namespace NAA.Service.Service
 
         public ApplicantService()
         {
-            dao = new ApplicantDAO();
+            applicantDao = new ApplicantDAO();
         }
 
         #endregion Constructors
@@ -32,29 +33,31 @@ namespace NAA.Service.Service
 
         public void AddApplicant(Applicant applicant)
         {
-            dao.AddApplicant(applicant);
+            applicantDao.AddApplicant(applicant);
         }
 
         public void DeleteApplicant(int id)
         {
-            dao.DeleteApplicant(id);
+            applicantDao.DeleteApplicant(id);
         }
 
         public void EditApplicant(Applicant applicant)
         {
-            dao.EditApplicant(applicant);
+            applicantDao.EditApplicant(applicant);
         }
 
         public List<Applicant> GetAllApplicants()
         {
-            return dao.GetAllApplicants();
+            return applicantDao.GetAllApplicants();
         }
 
         public Applicant GetApplicant(int id)
         {
-            return dao.GetApplicant(id);
+            return applicantDao.GetApplicant(id);
         }
 
+
         #endregion Methods
+
     }
 }

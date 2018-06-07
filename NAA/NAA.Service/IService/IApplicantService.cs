@@ -17,8 +17,8 @@ namespace NAA.Service.IService
         void DeleteApplicant(int id);
 
         void EditApplicant(Applicant applicant);
-
         List<Applicant> GetAllApplicants();
+
         Applicant GetApplicant(int id);
 
         #endregion Methods

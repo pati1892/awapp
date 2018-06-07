@@ -217,6 +217,7 @@
     <Content Include="Views\Application\ApplyHalam.cshtml" />
     <Content Include="Views\Application\DeleteApplication.cshtml" />
     <Content Include="Views\Application\EditApplication.cshtml" />
+    <Content Include="Views\Home\NotAllowMethod.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

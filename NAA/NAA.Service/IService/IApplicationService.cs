@@ -17,6 +17,8 @@ namespace NAA.Service.IService
 
         void AddApplication(Application application, CourseBEAN course, int applicantId);
 
+        bool DeletableOrEditable(int applicationId, int applicantId);
+
         void DeleteApplication(int id);
 
         void EditApplication(Application application);
@@ -32,6 +34,8 @@ namespace NAA.Service.IService
         IList<ApplicationBEAN> GetApplications(string universityName);
 
         bool IsDuplicate(CourseBEAN course, int applicantId);
+
+        bool IsEnrolled(int applicantId);
 
         #endregion Methods
     }

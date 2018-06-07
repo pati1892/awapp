@@ -45,6 +45,11 @@ namespace NAA.Service.Service
             applicationDAO.AddApplication(application);
         }
 
+        public bool DeletableOrEditable(int applicationId, int applicantId)
+        {
+            return !this.IsEnrolled(applicantId) && this.GetApplication(applicationId).UniversityOffer == ((char)ApplicationState.Pending).ToString();
+        }
+
         public void DeleteApplication(int id)
         {
             applicationDAO.DeleteApplication(id);
@@ -62,9 +67,19 @@ namespace NAA.Service.Service
 
         public void EditFirm(int applicationId, bool enroll)
         {
+            var app = this.GetApplication(applicationId);
+            if (this.IsEnrolled(app.ApplicantId))
+            {
+                return;
+            }
+
             if (enroll)
             {
-                var app = this.GetApplication(applicationId);
+                //enroll only if unconditional
+                if (app.UniversityOffer != ((char)ApplicationState.Unconditional).ToString())
+                {
+                    return;
+                }
                 var apps = this.GetApplications(app.ApplicantId);
                 foreach (ApplicationBEAN item in apps)
                 {
@@ -73,6 +88,15 @@ namespace NAA.Service.Service
                         applicationDAO.EditFirm(item.Id, false);
                     }
                 }
+            }
+            else
+            {
+                //reject only if Uncondition or Conditional
+                if (!(app.UniversityOffer == ((char)ApplicationState.Unconditional).ToString() || app.UniversityOffer == ((char)ApplicationState.Conditional).ToString()))
+                {
+                    return;
+                }
+
             }
             applicationDAO.EditFirm(applicationId, enroll);
         }
@@ -96,6 +120,11 @@ namespace NAA.Service.Service
         {
             //check if duplicate course
             return (this.GetApplications(applicantId).Any(x => x.University == course.University && x.ApplicantId == applicantId && x.CourseName == course.Name));
+        }
+
+        public bool IsEnrolled(int applicantId)
+        {
+            return this.GetApplications(applicantId).Any(x => x.Firm.HasValue && x.Firm.Value);
         }
 
         #endregion Methods
