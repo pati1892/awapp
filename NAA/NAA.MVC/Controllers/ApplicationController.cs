@@ -54,8 +54,21 @@ namespace NAA.MVC.Controllers
         public ActionResult ApplyHalam(Application application, int courseId, int applicantId)
         {
             CourseBEAN course = service.GetSheffieldHallamCourses().First(x => x.Id == courseId);
-            appService.AddApplication(application, course, applicantId);
-            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+            //validation
+            if (string.IsNullOrEmpty(application.PersonalStatement))
+            {
+                ModelState.AddModelError("PersonalStatement", "Personal statement is required");
+            }
+            else if (string.IsNullOrEmpty(application.TeacherContactDetails))
+            {
+                ModelState.AddModelError("TeacherContactDetails", "Teacher contact details are required");
+            }
+            if (ModelState.IsValid)
+            {
+                appService.AddApplication(application, course, applicantId);
+                return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+            }
+            return View();
         }
 
         public ActionResult ApplySheffield(int courseId, int applicantId)
@@ -74,8 +87,21 @@ namespace NAA.MVC.Controllers
         public ActionResult ApplySheffield(Application application, int courseId, int applicantId)
         {
             CourseBEAN course = service.GetSheffieldCourses().First(x => x.Id == courseId);
-            appService.AddApplication(application, course, applicantId);
-            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+            //validation
+            if (string.IsNullOrEmpty(application.PersonalStatement))
+            {
+                ModelState.AddModelError("PersonalStatement", "Personal statement is required");
+            }
+            else if (string.IsNullOrEmpty(application.TeacherContactDetails))
+            {
+                ModelState.AddModelError("TeacherContactDetails", "Teacher contact details are required");
+            }
+            if (ModelState.IsValid)
+            {
+                appService.AddApplication(application, course, applicantId);
+                return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+            }
+            return View();
         }
 
         public ActionResult DeleteApplication(int id, int applicantId)
@@ -118,8 +144,21 @@ namespace NAA.MVC.Controllers
             {
                 return RedirectToAction("NotAllowMethod", "Home");
             }
-            appService.EditApplication(application);
-            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+            //validation
+            if (string.IsNullOrEmpty(application.PersonalStatement))
+            {
+                ModelState.AddModelError("PersonalStatement", "Personal statement is required");
+            }
+            else if (string.IsNullOrEmpty(application.TeacherContactDetails))
+            {
+                ModelState.AddModelError("TeacherContactDetails", "Teacher contact details are required");
+            }
+            if (ModelState.IsValid)
+            {
+                appService.EditApplication(application);
+                return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+            }
+            return View();
         }
 
         public ActionResult EnrollApplication(int id, int applicantId)
