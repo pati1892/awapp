@@ -19,7 +19,7 @@ namespace NAA.Data
 
         [DisplayName("Name")]
         public string ApplicantName { get; set; }
-        [DisplayName("Adress")]
+        [DisplayName("Address")]
         public string ApplicantAddress { get; set; }
         [DisplayName("Phone")]
         public string Phone { get; set; }

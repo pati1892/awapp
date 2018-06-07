@@ -41,6 +41,7 @@ namespace NAA.MVC.Controllers
         {
             ViewBag.Message = message;
             ViewBag.applicantId = applicantId;
+            ViewBag.ShowInfo = false;
             return View("Index");
         }
 
