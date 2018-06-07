@@ -92,6 +92,8 @@ namespace NAA.Data.DAO
                     ,
                     UniversityOffer = r.UniversityOffer
                 })
+                .OrderBy(x => x.University)
+                .ThenBy(x => x.CourseName)
                 .ToList();
 
 

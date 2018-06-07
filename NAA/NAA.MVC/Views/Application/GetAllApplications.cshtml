@@ -1,46 +1,40 @@
 ﻿@model IEnumerable<NAA.Data.Bean.ApplicationBEAN>
 
 @{
-    ViewBag.Title = "Your Applications";
+    ViewBag.Title = "Your applications";
 }
 
-<h2>Your Applications</h2>
+<h2>Your applications</h2>
 
 <p>
-    @Html.ActionLink("Find Course", "Index", "Course", new { id = ViewBag.applicantId }, null)
+    @Html.ActionLink("Find course", "Index", "Course", new { id = ViewBag.applicantId }, null)
 </p>
 
 @if (Model == null)
 {
-    <p>No Applications</p>
+    <p>No applications</p>
 }
 @if (Model != null)
 {
     <table class="table">
         <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.ApplicantId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ApplicantName)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonalStatement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TeacherContactDetails)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TeacherReference)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.University)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UniversityOffer)
+                @Html.DisplayName("Course name")
+            </th>
+            <th>
+                @Html.DisplayName("Personal statement")
+            </th>
+            <th>
+                @Html.DisplayName("Teacher contact details")
+            </th>
+            <th>
+                @Html.DisplayName("Teacher reference")
+            </th>
+            <th>
+                @Html.DisplayName("University offer")
             </th>
             <th>
                 @Html.DisplayName("Enrolled")
@@ -51,12 +45,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.ApplicantId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ApplicantName)
-                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.University)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CourseName)
                 </td>
@@ -70,10 +61,23 @@
                     @Html.DisplayFor(modelItem => item.TeacherReference)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.University)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UniversityOffer)
+                    @switch (item.UniversityOffer)
+                    {
+                        case "P":
+                            @Html.DisplayName("Pending")
+                            break;
+                        case "R":
+                            @Html.DisplayName("Reject")
+                            break;
+                        case "U":
+                            @Html.DisplayName("Unconditional")
+                            break;
+                        case "C":
+                            @Html.DisplayName("Conditional")
+                            break;
+                        default:
+                            break;
+                    }
                 </td>
                 <td>
                     @if (item.Firm.HasValue)
