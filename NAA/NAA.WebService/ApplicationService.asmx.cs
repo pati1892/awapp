@@ -37,13 +37,13 @@ namespace NAA.WebService
 
         #region Methods
 
-        [WebMethod(Description ="Get all Applications of an university")]
+        [WebMethod(Description = "Get all Applications of an university")]
         public List<ApplicationBEAN> GetApplications(string universityName)
         {
             return appService.GetApplications(universityName).ToList();
         }
 
-        [WebMethod(Description ="Updates the state of an application to 'conditonal'")]
+        [WebMethod(Description = "Updates the state of an application to 'conditonal'")]
         public bool SetConditionalApplication(int applicationId)
         {
             var application = appService.GetApplication(applicationId);
@@ -55,7 +55,7 @@ namespace NAA.WebService
             var newValue = ((char)ApplicationState.Conditional).ToString();
             if (currentValue != newValue)
             {
-                if (application.Firm.HasValue && application.Firm.Value || currentValue == ((char)ApplicationState.Reject).ToString() || currentValue == ((char)ApplicationState.Unconditional).ToString())
+                if (!(currentValue == ((char)ApplicationState.Pending).ToString()))
                 {
                     return false;
                 }
@@ -77,7 +77,7 @@ namespace NAA.WebService
             var newValue = ((char)ApplicationState.Reject).ToString();
             if (currentValue != newValue)
             {
-                if (application.Firm.HasValue && application.Firm.Value || currentValue != ((char)ApplicationState.Pending).ToString())
+                if (!(currentValue == ((char)ApplicationState.Pending).ToString()))
                 {
                     return false;
                 }
@@ -100,7 +100,7 @@ namespace NAA.WebService
             var newValue = ((char)ApplicationState.Unconditional).ToString();
             if (currentValue != newValue)
             {
-                if (application.Firm.HasValue && application.Firm.Value || currentValue == ((char)ApplicationState.Reject).ToString())
+                if (!(currentValue == ((char)ApplicationState.Pending).ToString() || currentValue == ((char)ApplicationState.Conditional).ToString()))
                 {
                     return false;
                 }

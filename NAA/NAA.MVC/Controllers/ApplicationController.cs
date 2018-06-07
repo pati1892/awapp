@@ -43,6 +43,10 @@ namespace NAA.MVC.Controllers
             CourseBEAN course = service.GetSheffieldHallamCourses().First(x => x.Id == courseId);
             ViewBag.Course = course;
             ViewBag.University = uniService.GetUniversity(course.University);
+            if (appService.IsDuplicate(course, applicantId))
+            {
+                return RedirectToAction("WithMessage", "Course", new { message = $"You already applied to '{course.Name}'.", applicantId = applicantId });
+            }
             return View();
         }
 
@@ -59,6 +63,10 @@ namespace NAA.MVC.Controllers
             CourseBEAN course = service.GetSheffieldCourses().First(x => x.Id == courseId);
             ViewBag.Course = course;
             ViewBag.University = uniService.GetUniversity(course.University);
+            if (appService.IsDuplicate(course, applicantId))
+            {
+                return RedirectToAction("WithMessage", "Course", new { message = $"You already applied to '{course.Name}'.", applicantId=applicantId });
+            }
             return View();
         }
 
@@ -77,6 +85,20 @@ namespace NAA.MVC.Controllers
             ViewBag.applicantId = id;
 
             return View(applications);
+        }
+
+        public ActionResult DeleteApplication(int id, int applicantId)
+        {
+            Application application = appService.GetApplication(id);
+            ViewBag.applicantId = applicantId;
+            return View(application);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteApplication(Application application, int applicantId)
+        {
+            appService.DeleteApplication(application.Id);
+            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
 
         #endregion Methods

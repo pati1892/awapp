@@ -41,6 +41,7 @@ namespace NAA.Service.Service
             application.CourseName = course.Name;
             application.UniversityId = universityService.GetUniversity(course.University).UniversityId;
             application.UniversityOffer = ((char)ApplicationState.Pending).ToString();
+
             applicationDAO.AddApplication(application);
         }
 
@@ -69,7 +70,12 @@ namespace NAA.Service.Service
             return applicationDAO.GetApplications(universityName);
         }
 
-        #endregion Methods
+        public bool IsDuplicate(CourseBEAN course, int applicantId)
+        {
+            //check if duplicate course
+            return (this.GetApplications(applicantId).Any(x => x.University == course.University && x.ApplicantId == applicantId && x.CourseName == course.Name));
+        }
 
+        #endregion Methods
     }
 }

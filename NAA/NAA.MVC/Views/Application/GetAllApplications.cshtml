@@ -18,12 +18,12 @@
 {
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicantId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicantName)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ApplicantId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicantName)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CourseName)
             </th>
@@ -51,17 +51,20 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicantId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicantName)
-                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ApplicantId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicantName)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.CourseName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Firm)
+                    @if (item.Firm.HasValue)
+                    {
+                        @Html.DisplayFor(modelItem => item.Firm.Value)
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PersonalStatement)
@@ -79,9 +82,16 @@
                     @Html.DisplayFor(modelItem => item.UniversityOffer)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString())
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) @Html.DisplayText(" |");
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString())
+                    {
+                        @Html.DisplayText("| ");
+                        @Html.ActionLink("Delete", "DeleteApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
+                    }
                 </td>
             </tr>
         }

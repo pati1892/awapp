@@ -214,6 +214,8 @@
     <Content Include="Views\Course\GetSheffieldHalamCourses.cshtml" />
     <Content Include="Views\Application\ApplySheffield.cshtml" />
     <Content Include="Views\Application\GetAllApplications.cshtml" />
+    <Content Include="Views\Application\ApplyHalam.cshtml" />
+    <Content Include="Views\Application\DeleteApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

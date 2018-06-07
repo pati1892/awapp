@@ -1,10 +1,20 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Courses";
 }
 
+@if (ViewBag.Message != null)
+{
+    <h3 style="color:red">@ViewBag.Message</h3>
+}
+
+@if (ViewBag.ToManyApplications)
+{
+    <h3 style="color:red">@ViewBag.ToManyApplicationsMessage</h3>
+    @Html.ActionLink("Back to applications", "GetAllApplications", new { Controller = "Application", id = ViewBag.applicantId })
+}
 <h2>Sheffield</h2>
-@Html.Action("GetSheffieldCourses", new {id = ViewBag.applicantId})
+@Html.Action("GetSheffieldCourses", new { id = ViewBag.applicantId })
 <h2>Halam</h2>
 @Html.Action("GetSheffieldHalamCourses", new { id = ViewBag.applicantId })
 

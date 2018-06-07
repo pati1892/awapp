@@ -15,6 +15,7 @@ namespace NAA.Service.IService
         #region Methods
 
         void AddApplication(Application application, CourseBEAN course, int applicantId);
+
         void DeleteApplication(int id);
 
         void EditApplication(Application application);
@@ -22,9 +23,11 @@ namespace NAA.Service.IService
         Application GetApplication(int id);
 
         IList<ApplicationBEAN> GetApplications(int applicantId);
+
         IList<ApplicationBEAN> GetApplications(string universityName);
 
-        #endregion Methods
+        bool IsDuplicate(CourseBEAN course, int applicantId);
 
+        #endregion Methods
     }
 }

@@ -1,42 +1,41 @@
 ﻿@model NAA.Data.Application
 
 @{
-    ViewBag.Title = "ApplySheffield";
+    ViewBag.Title = "Apply for " + @ViewBag.Course.Name;
 }
 
-<h2>ApplySheffield</h2>
+<h2>Apply for @ViewBag.Course.Name</h2>
 
 @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+{
+    @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-        <h4>Application</h4>
+    <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
-            @Html.LabelFor(model => model.ApplicantId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ApplicantId, new {  htmlAttributes = new { @Value = ViewBag.ApplicantId, @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.ApplicantId, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.ApplicantId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ApplicantId, new {  htmlAttributes = new { @Value = ViewBag.ApplicantId, @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ApplicantId, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseName,  htmlAttributes: new {  @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @Value = ViewBag.CourseName, @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CourseName,  htmlAttributes: new {  @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @Value = ViewBag.CourseName, @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UniversityId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UniversityId, new { htmlAttributes = new { @Value = ViewBag.UniversityId, @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.UniversityId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.UniversityId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UniversityId, new { htmlAttributes = new { @Value = ViewBag.UniversityId, @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.UniversityId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.PersonalStatement, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -60,7 +59,7 @@
                 @Html.EditorFor(model => model.TeacherContactDetails, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TeacherContactDetails, "", new { @class = "text-danger" })
             </div>
-        </div>        
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -71,5 +70,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { Controller = "Course", id = int.Parse(Request.QueryString["applicantId"]) })
 </div>

@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<NAA.CourseService.Bean.CourseBEAN>
 
 @{
-    ViewBag.Title = "Get Courses";
     Layout = "";
 }
 
@@ -28,36 +27,43 @@
         <th>
             @Html.DisplayNameFor(model => model.University)
         </th>
-        <th></th>
+        @if (!ViewBag.ToManyApplications)
+        {
+            <th></th>
+        }
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Condition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Degree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nss)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tarif)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.University)
-        </td>
-        <td>
-            @Html.ActionLink("Apply", "ApplyHalam", new { courseId=item.Id, applicantId = ViewBag.applicantId, Controller = "Application" }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Degree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nss)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tarif)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.University)
+            </td>
+            @if (!ViewBag.ToManyApplications)
+            {
+                <td>
+                    @Html.ActionLink("Apply", "ApplyHalam", new { courseId = item.Id, applicantId = ViewBag.applicantId, Controller = "Application" })
+                </td>
+            }
+        </tr>
+    }
 
 </table>
