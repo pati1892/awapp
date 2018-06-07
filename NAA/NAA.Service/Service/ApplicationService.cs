@@ -62,6 +62,18 @@ namespace NAA.Service.Service
 
         public void EditFirm(int applicationId, bool enroll)
         {
+            if (enroll)
+            {
+                var app = this.GetApplication(applicationId);
+                var apps = this.GetApplications(app.ApplicantId);
+                foreach (ApplicationBEAN item in apps)
+                {
+                    if (item.Id != applicationId)
+                    {
+                        applicationDAO.EditFirm(item.Id, false);
+                    }
+                }
+            }
             applicationDAO.EditFirm(applicationId, enroll);
         }
 

@@ -83,7 +83,7 @@ namespace NAA.MVC.Controllers
         {
             IList<ApplicationBEAN> applications = appService.GetApplications(id);
             ViewBag.applicantId = id;
-
+            ViewBag.IsEnrolled = applications.Any(x => x.Firm.HasValue && x.Firm.Value);
             return View(applications);
         }
 
@@ -117,6 +117,17 @@ namespace NAA.MVC.Controllers
             return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
         }
 
+        public ActionResult EnrollApplication(int id, int applicantId)
+        {
+            appService.EditFirm(id, true);
+            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+        }
+
+        public ActionResult RejectApplication(int id, int applicantId)
+        {
+            appService.EditFirm(id, false);
+            return RedirectToAction("GetAllApplications", "Application", new { id = applicantId });
+        }
         #endregion Methods
     }
 }

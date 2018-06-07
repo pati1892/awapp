@@ -65,6 +65,14 @@
                     {
                         @Html.DisplayFor(modelItem => item.Firm.Value)
                     }
+                    else
+                    {
+                        if (!ViewBag.IsEnrolled)
+                        {
+                            @Html.ActionLink("Enroll me", "EnrollApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayName(" | ")
+                            @Html.ActionLink("Reject", "RejectApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PersonalStatement)
@@ -82,14 +90,14 @@
                     @Html.DisplayFor(modelItem => item.UniversityOffer)
                 </td>
                 <td>
-                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString())
+                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString() && !ViewBag.IsEnrolled)
                     {
-                        @Html.ActionLink("Edit", "EditApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayText(" |");
+                        @Html.ActionLink("Edit", "EditApplication", new { id = item.Id, applicantId = ViewBag.applicantId }) @Html.DisplayName(" |");
                     }
                     @Html.ActionLink("Details", "Details", new { id = item.Id })
-                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString())
+                    @if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Pending).ToString() && !ViewBag.IsEnrolled)
                     {
-                        @Html.DisplayText("| ");
+                        @Html.DisplayName("| ");
                         @Html.ActionLink("Delete", "DeleteApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
                     }
                 </td>
