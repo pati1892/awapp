@@ -51,6 +51,28 @@ namespace NAA.WebService
             return appService.GetApplications(universityName).ToList();
         }
 
+        [WebMethod(Description = "Change the state of an application. (Allowed values are 'C'=Conditional, U='Unconditional', R='Reject')")]
+        public bool SetApplicationOfferState(int applicationId, string universityName, string offerState)
+        {
+            if (string.IsNullOrEmpty(offerState) || offerState.Length != 1)
+            {
+                return false;
+            }
+            if (offerState.Equals("U", StringComparison.OrdinalIgnoreCase))
+            {
+                return this.SetUnconditionalApplication(applicationId, universityName);
+            }
+            else if (offerState.Equals("C", StringComparison.OrdinalIgnoreCase))
+            {
+                return this.SetConditionalApplication(applicationId, universityName);
+            }
+            else if (offerState.Equals("R", StringComparison.OrdinalIgnoreCase))
+            {
+                return this.SetRejectApplication(applicationId, universityName);
+            }
+            return false;
+        }
+
         [WebMethod(Description = "Updates the state of an application to 'conditonal'")]
         public bool SetConditionalApplication(int applicationId, string universityName)
         {
@@ -87,7 +109,7 @@ namespace NAA.WebService
             var newValue = ((char)ApplicationState.Reject).ToString();
             if (currentValue != newValue)
             {
-                if (!(currentValue == ((char)ApplicationState.Pending).ToString()))
+                if (!(currentValue == ((char)ApplicationState.Pending).ToString() || currentValue == ((char)ApplicationState.Conditional).ToString()))
                 {
                     return false;
                 }
@@ -118,7 +140,6 @@ namespace NAA.WebService
             appService.EditApplicationState(applicationId, ApplicationState.Unconditional);
             return true;
         }
-
         private bool CheckPreConditions(int applicationId, string universityName, out Data.Application application)
         {
             application = appService.GetApplication(applicationId);
@@ -147,5 +168,6 @@ namespace NAA.WebService
         }
 
         #endregion Methods
+
     }
 }
