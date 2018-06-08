@@ -63,7 +63,23 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UniversityOffer)
+            @switch (Model.UniversityOffer)
+            {
+                case "P":
+                    @Html.DisplayName("Pending")
+                    break;
+                case "R":
+                    @Html.DisplayName("Reject")
+                    break;
+                case "U":
+                    @Html.DisplayName("Unconditional")
+                    break;
+                case "C":
+                    @Html.DisplayName("Conditional")
+                    break;
+                default:
+                    break;
+            }
         </dd>
 
         <dt>
@@ -71,17 +87,33 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Firm)
+            @*@Html.DisplayFor(model => model.Firm)*@
+            @if (Model.Firm.HasValue)
+            {
+                if (Model.Firm.Value)
+                {
+                    @Html.DisplayName("Enrolled")
+                }
+                else
+                {
+                    @Html.DisplayName("Dismissed")
+                }
+            }
+            else
+            {
+                @Html.DisplayName("-")
+            }
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "GetAllApplications", new { id=ViewBag.applicantId })
+            @Html.ActionLink("Back to List", "GetAllApplications", new { id = ViewBag.applicantId })
         </div>
     }
 </div>

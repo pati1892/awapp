@@ -82,7 +82,6 @@
                 <td>
                     @if (item.Firm.HasValue)
                     {
-                        @*@Html.DisplayFor(modelItem => item.Firm.Value)*@
                         if (item.Firm.Value)
                         {
                             @Html.DisplayName("Enrolled")
@@ -102,7 +101,7 @@
                             }
                             if (item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Unconditional).ToString() || item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Conditional).ToString())
                             {
-                                @Html.ActionLink("Reject", "RejectApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
+                                @Html.ActionLink("Dismiss", "RejectApplication", new { id = item.Id, applicantId = ViewBag.applicantId })
                             }
                             if (!(item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Unconditional).ToString() || item.UniversityOffer == ((char)NAA.Data.Enum.ApplicationState.Conditional).ToString()))
                             {
