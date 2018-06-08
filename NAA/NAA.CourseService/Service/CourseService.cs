@@ -11,6 +11,7 @@ namespace NAA.CourseService.Service
 {
     public class CourseService : ICourseService
     {
+
         #region Fields
 
         private readonly SheffieldHallam.SHUWebService sheffieldHalamProxy = null;
@@ -30,6 +31,11 @@ namespace NAA.CourseService.Service
 
         #region Methods
 
+        public CourseBEAN GetSheffieldCourse(int courseId)
+        {
+            return this.GetSheffieldCourses().FirstOrDefault(x => x.Id == courseId);
+        }
+
         public IList<CourseBEAN> GetSheffieldCourses()
         {
             var courseList = sheffieldProxy.SheffCourses();
@@ -42,6 +48,11 @@ namespace NAA.CourseService.Service
                 }
             }
             return result;
+        }
+
+        public CourseBEAN GetSheffieldHallamCourse(int courseId)
+        {
+            return this.GetSheffieldHallamCourses().FirstOrDefault(x => x.Id == courseId);
         }
 
         public IList<CourseBEAN> GetSheffieldHallamCourses()
@@ -59,5 +70,6 @@ namespace NAA.CourseService.Service
         }
 
         #endregion Methods
+
     }
 }

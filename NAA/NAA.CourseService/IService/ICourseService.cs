@@ -9,9 +9,14 @@ namespace NAA.CourseService.IService
 {
     public interface ICourseService
     {
+
         #region Methods
 
+        CourseBEAN GetSheffieldCourse(int courseId);
+
         IList<CourseBEAN> GetSheffieldCourses();
+        CourseBEAN GetSheffieldHallamCourse(int courseId);
+
         IList<CourseBEAN> GetSheffieldHallamCourses();
 
         #endregion Methods
