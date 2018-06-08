@@ -47,7 +47,7 @@ namespace NAA.CourseService.Service
                     result.Add(CourseMapper.GetInstance().Map(course));
                 }
             }
-            return result;
+            return result.OrderBy(x => x.Name).ToList();
         }
 
         public CourseBEAN GetSheffieldHallamCourse(int courseId)
@@ -66,7 +66,7 @@ namespace NAA.CourseService.Service
                     result.Add(CourseMapper.GetInstance().Map(course));
                 }
             }
-            return result;
+            return result.OrderBy(x => x.Name).ToList();
         }
 
         #endregion Methods

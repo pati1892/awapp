@@ -42,6 +42,7 @@ namespace NAA.MVC.Controllers
         {
             CourseBEAN course = service.GetSheffieldHallamCourse(courseId);
             ViewBag.Course = course;
+            ViewBag.CourseName = course.Name;
             ViewBag.University = uniService.GetUniversity(course.University);
             if (appService.IsDuplicate(course, applicantId))
             {
@@ -55,6 +56,7 @@ namespace NAA.MVC.Controllers
         {
             CourseBEAN course = service.GetSheffieldHallamCourse(courseId);
             ViewBag.Course = course;
+            ViewBag.CourseName = course.Name;
             ViewBag.University = uniService.GetUniversity(course.University);
             //validation
             if (string.IsNullOrEmpty(application.PersonalStatement))
@@ -77,6 +79,7 @@ namespace NAA.MVC.Controllers
         {
             CourseBEAN course = service.GetSheffieldCourse(courseId);
             ViewBag.Course = course;
+            ViewBag.CourseName = course.Name;
             ViewBag.University = uniService.GetUniversity(course.University);
             if (appService.IsDuplicate(course, applicantId))
             {
@@ -90,6 +93,7 @@ namespace NAA.MVC.Controllers
         {
             CourseBEAN course = service.GetSheffieldCourse(courseId);
             ViewBag.Course = course;
+            ViewBag.CourseName = course.Name;
             ViewBag.University = uniService.GetUniversity(course.University);
             //validation
             if (string.IsNullOrEmpty(application.PersonalStatement))
@@ -138,6 +142,9 @@ namespace NAA.MVC.Controllers
             }
             Application application = appService.GetApplication(id);
             ViewBag.applicantId = applicantId;
+            ViewBag.University = uniService.GetUniversity(application.UniversityId);
+            ViewBag.CourseName = application.CourseName;
+
             return View(application);
         }
 
@@ -148,6 +155,10 @@ namespace NAA.MVC.Controllers
             {
                 return RedirectToAction("NotAllowMethod", "Home");
             }
+            ViewBag.applicantId = applicantId;
+            ViewBag.University = uniService.GetUniversity(application.UniversityId);
+            ViewBag.CourseName = application.CourseName;
+
             //validation
             if (string.IsNullOrEmpty(application.PersonalStatement))
             {
