@@ -4,11 +4,18 @@
     ViewBag.Title = "Profiles";
 }
 
+@if (ViewBag.Message != null)
+{
+    <h3 style="color:red">@ViewBag.Message</h3>
+}
+
 <h2>Profiles</h2>
 
 <p>
     @Html.ActionLink("Create new profile", "Create")
 </p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -26,27 +33,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicantName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicantAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Show applications", "GetAllApplications", "Application", new { id = item.Id }, null)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicantAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Show applications", "GetAllApplications", "Application", new { id = item.Id }, null)
+
+
+            </td>
+        </tr>
+    }
 
 </table>

@@ -26,9 +26,10 @@ namespace NAA.MVC.Controllers
             return View(service.GetAllApplicants());
         }
 
-        public ActionResult GetAllProfilesWithMessage()
+        public ActionResult GetAllProfilesWithMessage(int id)
         {
-            ViewBag.Message = "Cannot delete profile, existing applications must be deleted first";
+            Applicant applicant = service.GetApplicant(id);
+            ViewBag.Message = $"Cannot delete profile '{applicant.ApplicantName}', existing applications must be deleted first";
             return View("GetAllProfiles", service.GetAllApplicants());
         }
 
@@ -42,17 +43,17 @@ namespace NAA.MVC.Controllers
         {
             if (string.IsNullOrEmpty(applicant.ApplicantName))
             {
-                ModelState.AddModelError("ApplicantName", "ApplicantName is required");
+                ModelState.AddModelError("ApplicantName", "Name is required");
             }
-            else if (string.IsNullOrEmpty(applicant.ApplicantAddress))
+            if (string.IsNullOrEmpty(applicant.ApplicantAddress))
             {
-                ModelState.AddModelError("ApplicantAddress", "ApplicantAddress is required");
+                ModelState.AddModelError("ApplicantAddress", "Address is required");
             }
-            else if (string.IsNullOrEmpty(applicant.Phone))
+            if (string.IsNullOrEmpty(applicant.Phone))
             {
                 ModelState.AddModelError("Phone", "Phone is required");
             }
-            else if (string.IsNullOrEmpty(applicant.Email))
+            if (string.IsNullOrEmpty(applicant.Email))
             {
                 ModelState.AddModelError("Email", "Email is required");
             }
@@ -120,10 +121,11 @@ namespace NAA.MVC.Controllers
 
         public ActionResult Delete(int id)
         {
-            if(appService.GetApplications(id).Count > 0)
+            if (appService.GetApplications(id).Count > 0)
             {
-                return RedirectToAction(nameof(GetAllProfilesWithMessage));
+                return RedirectToAction(nameof(GetAllProfilesWithMessage), new { id = id });
             }
+            
             Applicant applicant = service.GetApplicant(id);
             return View(applicant);
         }
